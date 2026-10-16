@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رائدات المستقبل — تسجيل التحفيز</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F4F2EE; --card:#FFFFFF; --ink:#1F1A1C; --muted:#5E5559; --line:#E4DEDA; --field:#D9D2CE;
+  --maroon:#8A1538; --maroon-d:#5E0E26; --maroon-s:#F6E9EE; --gold:#B8862B; --gold-ink:#6B4C0F; --gold-s:#FBF1DC;
+  --ok:#1E6B3A; --ok-s:#E6F2EA; --bad:#A61B1B;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Tahoma,sans-serif;font-size:15px;line-height:1.6}
+h1,h2,h3{margin:0;line-height:1.4}
+.kufi{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif}
+button,input,select,textarea{font-family:inherit;font-size:15px;color:var(--ink)}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--maroon);outline-offset:2px}
+.wrap{max-width:1360px;margin:0 auto;padding:0 24px}
+header.top{background:var(--maroon);color:#fff}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:48px;height:48px;border-radius:12px;background:#fff;color:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.brand .t1{font-weight:700;font-size:20px}
+.brand .t2{font-size:13px;color:#F3D9E1}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px}
+nav.tabs button{background:transparent;color:#fff;border:1px solid #B4546F;border-radius:999px;padding:9px 18px;font-weight:500;font-size:14px;min-height:44px}
+nav.tabs button[aria-selected="true"]{background:#fff;color:var(--maroon);border-color:#fff;font-weight:700}
+.leaders{background:var(--maroon-d);color:#F3D9E1;font-size:13px}
+.leaders .wrap{display:flex;flex-wrap:wrap;gap:6px 22px;padding-top:7px;padding-bottom:7px}
+.leaders b{color:#fff;font-weight:600}
+main{padding:24px 0 56px}
+.view{display:none}.view.on{display:block}
+.layout{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start}
+.col-main{flex:999 1 620px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.col-side{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.sec-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.sec-h .l{display:flex;align-items:center;gap:10px}
+.num{width:28px;height:28px;border-radius:50%;background:var(--maroon);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:0 0 28px}
+.sec-h h2{font-size:18px;font-weight:700}
+.page-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.page-h h1{font-size:26px;font-weight:800}
+.page-h p{margin:2px 0 0;color:var(--muted)}
+label.lb{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+.inp{height:46px;padding:0 12px;border:1px solid var(--field);border-radius:10px;background:#fff;width:100%}
+textarea.inp{height:auto;padding:10px 12px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.row>*{flex:1 1 180px;min-width:0}
+.pills{display:flex;gap:4px;background:var(--ground);padding:4px;border-radius:999px;flex-wrap:wrap}
+.pills button{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:0 14px;height:36px;font-size:13px;font-weight:600}
+.pills button[aria-pressed="true"]{background:#fff;color:var(--maroon);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.seg{display:flex;gap:4px;background:var(--ground);padding:4px;border-radius:12px}
+.seg button{border:0;background:transparent;color:var(--muted);border-radius:9px;padding:0 16px;height:40px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
+.seg button[aria-pressed="true"]{background:#fff;color:var(--maroon);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.seg button.g[aria-pressed="true"]{background:var(--gold-s);color:var(--gold-ink)}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.fbtn{min-height:66px;text-align:right;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff}
+.fbtn b{display:block;font-size:15px;line-height:1.4}
+.fbtn span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.fbtn[aria-pressed="true"]{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.fbtn[aria-pressed="true"] span{color:#F3D9E1}
+.crit{display:flex;flex-direction:column;gap:8px}
+.cbtn{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;text-align:right;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:#fff}
+.cbtn .dot{flex:0 0 18px;width:18px;height:18px;border-radius:50%;border:2px solid #B9AFAA;background:#fff}
+.cbtn[aria-checked="true"]{border-color:var(--maroon);background:var(--maroon-s)}
+.cbtn[aria-checked="true"] .dot{border:6px solid var(--maroon)}
+.crit.gold .cbtn[aria-checked="true"]{border-color:var(--gold);background:var(--gold-s)}
+.crit.gold .cbtn[aria-checked="true"] .dot{border-color:var(--gold)}
+.note{padding:12px 14px;border-radius:10px;background:var(--ground);color:var(--muted);font-size:14px;margin:0}
+.policy{padding:12px 14px;border-radius:10px;background:var(--maroon-s);color:var(--maroon-d);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid var(--field);background:#fff;font-size:14px;display:flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{border-color:var(--maroon);background:var(--maroon-s);color:var(--maroon-d);font-weight:600}
+.btn{height:50px;padding:0 26px;border-radius:12px;border:1px solid var(--field);background:#fff;font-weight:600;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.pri{background:var(--maroon);border-color:var(--maroon);color:#fff;font-weight:700;font-size:16px}
+.btn.sm{height:40px;padding:0 14px;font-size:14px;border-radius:10px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--maroon)}
+.btn.danger{color:var(--bad)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+/* employee combobox */
+.combo{position:relative}
+.combo-list{position:absolute;inset-inline:0;top:calc(100% + 4px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:320px;overflow:auto;z-index:20;padding:6px;display:none}
+.combo-list.on{display:block}
+.opt{display:block;width:100%;text-align:right;border:0;background:transparent;padding:9px 12px;border-radius:8px}
+.opt:hover,.opt.act{background:var(--maroon-s)}
+.opt small{display:block;color:var(--muted);font-size:12px}
+.emp-sel{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--ground)}
+.av{width:44px;height:44px;border-radius:50%;background:var(--maroon-s);color:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:0 0 44px}
+.emp-sel .n{font-weight:700}
+.emp-sel .m{color:var(--muted);font-size:13px}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.tag.g{background:var(--gold-s);color:var(--gold-ink)}
+.tag.b{background:var(--ground);color:var(--muted)}
+.tag.bad{background:#FBE9E9;color:var(--bad)}
+.tag.ok{background:var(--ok-s);color:var(--ok)}
+/* side */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.stat{background:var(--ground);border-radius:12px;padding:12px}
+.stat .k{font-size:12px;color:var(--muted)}
+.stat .v{font-size:26px;font-weight:800}
+.stat.g{background:var(--gold-s)}.stat.g .k,.stat.g .v{color:var(--gold-ink)}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.steps i{height:12px;border-radius:999px;background:#EEE9E6}
+.steps i.on{background:var(--gold)}
+/* tables */
+.tbl-box{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--ground);text-align:right;padding:10px 12px;font-weight:600;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #EEE9E6;vertical-align:top}
+tr.empty td{text-align:center;color:var(--muted);padding:28px}
+/* reports */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi .k{font-size:13px;color:var(--muted)}
+.kpi .v{font-size:30px;font-weight:800;color:var(--maroon)}
+.kpi.g .v{color:var(--gold-ink)}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(120px,210px) 1fr 70px;gap:10px;align-items:center;font-size:14px}
+.track{height:14px;background:var(--ground);border-radius:999px;overflow:hidden;display:flex}
+.track .b{background:var(--maroon)} .track .gd{background:var(--gold)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-inline-end:6px;vertical-align:-1px}
+.sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px;text-align:center}
+.sign div{border-top:1px solid var(--field);padding-top:10px;font-size:14px}
+.sign b{display:block}
+.toast{position:fixed;inset-inline-start:50%;transform:translateX(50%);bottom:24px;background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;display:none;z-index:50;max-width:90vw}
+.toast.on{display:block}
+.err{color:var(--bad);font-size:14px;font-weight:600}
+.modal{position:fixed;inset:0;background:rgba(31,26,28,.5);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
+.modal.on{display:flex}
+.modal .card{width:min(520px,100%)}
+.sync{font-size:12px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.15)}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .page-h h1{font-size:22px}
+  .bar{grid-template-columns:1fr 60px}.bar .track{grid-column:1 / -1;order:3}
+  .sign{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff}
+  header.top,.leaders,.noprint,.toast{display:none!important}
+  .view{display:none!important}.view.print{display:block!important}
+  .card,.kpi{border-color:#ccc;break-inside:avoid}
+  main{padding:0}
+  .print-head{display:block!important}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.print-head{display:none;text-align:center;margin-bottom:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo kufi" aria-hidden="true">ر</div>
+      <div>
+        <div class="t1 kufi">رائدات المستقبل</div>
+        <div class="t2">مدرسة هند بنت عتبة الإعدادية للبنات · سياسة التحفيز <bdi dir="ltr" id="yearLbl"></bdi> <span class="sync" id="syncLbl"></span></div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="أقسام التطبيق">
+      <button role="tab" data-view="entry" aria-selected="true">تسجيل تحفيز</button>
+      <button role="tab" data-view="records" aria-selected="false">السجل</button>
+      <button role="tab" data-view="reports" aria-selected="false">التقارير</button>
+      <button role="tab" data-view="staff" aria-selected="false">الموظفات</button>
+    </nav>
+  </div>
+</header>
+<div class="leaders"><div class="wrap" id="leaders"></div></div>
+
+<main class="wrap">
+<!-- ============ ENTRY ============ -->
+<section class="view on" id="v-entry" aria-label="تسجيل تحفيز">
+  <div class="layout">
+    <div class="col-main">
+      <div class="page-h">
+        <div>
+          <h1 class="kufi">تسجيل تحفيز جديد</h1>
+          <p>اختاري الموظفة والمجال والمعيار المحقق، ثم المكافأة وأدلة التوثيق.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <label for="date" style="font-weight:600">التاريخ</label>
+          <input id="date" type="date" class="inp" style="width:auto">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sec-h"><div class="l"><span class="num">١</span><h2>الموظفة</h2></div></div>
+        <div class="combo">
+          <label class="lb" for="empSearch">ابحثي باسم الموظفة أو المسمى أو القسم</label>
+          <input id="empSearch" class="inp" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="empList" placeholder="اكتبي جزءًا من الاسم…">
+          <div class="combo-list" id="empList" role="listbox"></div>
+        </div>
+        <div id="empSel"></div>
+      </div>
+
+      <div class="card">
+        <div class="sec-h">
+          <div class="l"><span class="num">٢</span><h2>مجال التميز</h2></div>
+          <div class="pills" role="group" aria-label="تصفية المجالات" id="catPills"></div>
+        </div>
+        <div class="fields" id="fields"></div>
+      </div>
+
+      <div class="card">
+        <div class="sec-h">
+          <div class="l"><span class="num">٣</span><h2 id="critTitle">المعيار المحقق</h2></div>
+          <div class="seg" role="group" aria-label="مستوى المعيار" id="levels"></div>
+        </div>
+        <div id="critBox"></div>
+      </div>
+
+      <div class="row" style="gap:18px">
+        <div class="card" style="display:flex;flex-direction:column;gap:14px">
+          <div class="sec-h" style="margin:0"><div class="l"><span class="num">٤</span><h2>المكافأة</h2></div></div>
+          <div class="policy" id="policyReward"></div>
+          <div><label class="lb" for="reward">المكافأة الممنوحة</label><select id="reward" class="inp"></select></div>
+          <div class="row">
+            <div style="flex:1 1 120px"><label class="lb" for="amount">القيمة المادية (ر.ق)</label><input id="amount" class="inp" type="number" min="0" step="1" placeholder="0"></div>
+            <div style="flex:2 1 200px"><label class="lb" for="by">المُرشِّحة / الجهة</label><select id="by" class="inp"></select></div>
+          </div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:14px">
+          <div class="sec-h" style="margin:0"><div class="l"><span class="num">٥</span><h2>أدلة التوثيق</h2></div></div>
+          <div class="chips" role="group" aria-label="الأدلة" id="evidence"></div>
+          <div><label class="lb" for="evLink">رابط الدليل (اختياري)</label><input id="evLink" class="inp" type="url" placeholder="رابط ملف على OneDrive أو Drive…" dir="ltr" style="text-align:right"></div>
+          <div><label class="lb" for="notes">ملاحظات</label><textarea id="notes" class="inp" rows="2" placeholder="وصف مختصر للإنجاز…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn pri" id="saveBtn" type="button">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>
+          حفظ في السجل
+        </button>
+        <button class="btn" id="resetBtn" type="button">مسح النموذج</button>
+        <span id="formErr" class="err" role="alert"></span>
+      </div>
+    </div>
+
+    <aside class="col-side" aria-label="ملخص">
+      <div class="card" id="empCard"></div>
+      <div class="card">
+        <h2 style="font-size:16px;margin-bottom:10px">آخر التسجيلات</h2>
+        <div id="recentMini"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ RECORDS ============ -->
+<section class="view" id="v-records" aria-label="السجل">
+  <div class="page-h" style="margin-bottom:16px">
+    <div><h1 class="kufi">سجل التحفيز</h1><p id="recCount"></p></div>
+    <div class="actions noprint">
+      <button class="btn sm" id="exportBtn" type="button">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></svg>
+        تصدير السجلات فقط
+      </button>
+      <button class="btn pri sm" id="reportXlsx" type="button">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M9 13h7M9 17h7M9 9h3"/></svg>
+        تنزيل ملف التقارير (إكسل)
+      </button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="row" style="margin-bottom:14px">
+      <div><label class="lb" for="recPeriod">الفترة</label><select id="recPeriod" class="inp"></select></div>
+      <div><label class="lb" for="recSearch">بحث</label><input id="recSearch" class="inp" type="search" placeholder="اسم الموظفة أو المجال…"></div>
+    </div>
+    <div class="tbl-box">
+      <table>
+        <thead><tr><th>التاريخ</th><th>الموظفة</th><th>المجال</th><th>المستوى</th><th>المعيار</th><th>المكافأة</th><th>ر.ق</th><th>المرشِّحة</th><th>الأدلة</th><th><span class="sr">حذف</span></th></tr></thead>
+        <tbody id="recBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card noprint" id="backupCard" style="margin-top:18px">
+    <h2 style="font-size:16px">نسخة احتياطية</h2>
+    <p class="note" style="margin:10px 0" id="backupNote"></p>
+    <div class="actions">
+      <button class="btn sm" id="backupOut" type="button">تنزيل نسخة احتياطية</button>
+      <label class="btn sm" for="backupIn" style="cursor:pointer">استعادة من نسخة</label>
+      <input id="backupIn" type="file" accept=".json,application/json" style="position:absolute;width:1px;height:1px;opacity:0">
+    </div>
+  </div>
+</section>
+
+<!-- ============ REPORTS ============ -->
+<section class="view" id="v-reports" aria-label="التقارير">
+  <div class="print-head">
+    <h2 class="kufi">مدرسة هند بنت عتبة الإعدادية للبنات — رائدات المستقبل</h2>
+  </div>
+  <div class="page-h" style="margin-bottom:16px">
+    <div><h1 class="kufi" id="repTitle">التقارير</h1><p>تقرير لكل شهر، وتقرير للفصل الأول (سبتمبر–ديسمبر) والفصل الثاني (يناير–مايو).</p></div>
+    <div class="actions noprint">
+      <div><label class="lb" for="repYear">السنة الدراسية</label><select id="repYear" class="inp" style="width:auto"></select></div>
+      <div><label class="lb" for="repPeriod">الفترة</label><select id="repPeriod" class="inp" style="width:auto"></select></div>
+      <button class="btn sm" id="printBtn" type="button" style="align-self:flex-end;height:46px">طباعة التقرير</button>
+      <button class="btn pri sm" id="reportXlsx2" type="button" style="align-self:flex-end;height:46px">تنزيل ملف التقارير (إكسل)</button>
+    </div>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="layout" style="margin-top:18px">
+    <div class="card" style="flex:1 1 460px;min-width:0">
+      <h2 style="font-size:17px;margin-bottom:12px">التكريمات حسب المجال</h2>
+      <div class="bars" id="byField"></div>
+      <div class="legend"><span><i style="background:var(--maroon)"></i>أساسي</span><span><i style="background:var(--gold)"></i>ذهبي</span></div>
+    </div>
+    <div class="card" style="flex:1 1 360px;min-width:0" id="byMonthCard">
+      <h2 style="font-size:17px;margin-bottom:12px">التكريمات حسب الشهر</h2>
+      <div class="bars" id="byMonth"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h2 style="font-size:17px;margin-bottom:12px">الموظفات المُكرَّمات</h2>
+    <div class="tbl-box"><table><thead><tr><th>#</th><th>الموظفة</th><th>القسم</th><th>التكريمات</th><th>ذهبي</th><th>ر.ق</th><th>أمري تدللي (السنة)</th></tr></thead><tbody id="repEmp"></tbody></table></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h2 style="font-size:17px;margin-bottom:12px">تفاصيل التكريمات</h2>
+    <div class="tbl-box"><table><thead><tr><th>التاريخ</th><th>الموظفة</th><th>المجال</th><th>المستوى</th><th>المعيار</th><th>المكافأة</th></tr></thead><tbody id="repDet"></tbody></table></div>
+    <div class="sign" id="signs"></div>
+  </div>
+</section>
+
+<!-- ============ STAFF ============ -->
+<section class="view" id="v-staff" aria-label="الموظفات">
+  <div class="page-h" style="margin-bottom:16px">
+    <div><h1 class="kufi">الموظفات</h1><p id="staffCount"></p></div>
+    <button class="btn pri sm noprint" id="addEmp" type="button">+ إضافة موظفة</button>
+  </div>
+  <div class="card">
+    <div class="row" style="margin-bottom:14px">
+      <div><label class="lb" for="staffSearch">بحث</label><input id="staffSearch" class="inp" type="search" placeholder="الاسم أو المسمى أو القسم…"></div>
+      <div><label class="lb" for="staffDept">القسم</label><select id="staffDept" class="inp"></select></div>
+    </div>
+    <div class="tbl-box"><table><thead><tr><th>الاسم</th><th>المسمى الوظيفي</th><th>القسم</th><th>الفئة</th><th>ذهبي (السنة)</th><th>الحالة</th><th><span class="sr">إجراءات</span></th></tr></thead><tbody id="staffBody"></tbody></table></div>
+  </div>
+</section>
+</main>
+
+<div class="modal" id="empModal" role="dialog" aria-modal="true" aria-labelledby="empModalT">
+  <div class="card">
+    <h2 id="empModalT" style="font-size:18px;margin-bottom:14px">بيانات الموظفة</h2>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div><label class="lb" for="mName">الاسم</label><input id="mName" class="inp"></div>
+      <div><label class="lb" for="mTitle">المسمى الوظيفي</label><input id="mTitle" class="inp"></div>
+      <div><label class="lb" for="mNo">الرقم الوظيفي <span style="font-weight:400;color:var(--muted)">(يظهر في ملف الإكسل فقط)</span></label><input id="mNo" class="inp" inputmode="numeric" dir="ltr" style="text-align:right"></div>
+      <div class="row">
+        <div><label class="lb" for="mDept">القسم</label><input id="mDept" class="inp" list="deptList"><datalist id="deptList"></datalist></div>
+        <div><label class="lb" for="mCat">الفئة</label><select id="mCat" class="inp"><option>أكاديمية</option><option>إدارية</option></select></div>
+      </div>
+      <span class="err" id="mErr" role="alert"></span>
+      <div class="actions"><button class="btn pri sm" id="mSave" type="button">حفظ</button><button class="btn sm" id="mCancel" type="button">إلغاء</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="pinModal" role="dialog" aria-modal="true" aria-labelledby="pinT">
+  <div class="card">
+    <h2 id="pinT" style="font-size:18px;margin-bottom:8px">رمز الدخول</h2>
+    <p class="note" style="margin-bottom:12px">أدخلي رمز الدخول الذي حددته إدارة المدرسة. يُحفظ على هذا الجهاز حتى تضغطي «تسجيل الخروج».</p>
+    <label class="lb" for="pinIn">الرمز</label><input id="pinIn" class="inp" type="password" autocomplete="current-password">
+    <p class="err" id="pinErr" role="alert"></p>
+    <button class="btn pri sm" id="pinGo" type="button">دخول</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =================== إعدادات الموقع =================== */
+const CONFIG = {
+  API_URL: "/api/data",                 // واجهة البيانات على Vercel (لا تغيّريه)
+  TEMPLATE_URL: "report-template.xlsx",  // قالب ملف التقارير بجانب هذا الملف
+  SCHOOL: "مدرسة هند بنت عتبة الإعدادية للبنات",
+  LEADERS: [
+    { role: "مديرة المدرسة", name: "حصة الشمري" },
+    { role: "النائبة الأكاديمية", name: "إيناس العوضي" },
+    { role: "النائبة الإدارية", name: "مريم المري" }
+  ]
+};
+/* ===================================================== */
+
+const POLICY = {"fields": [{"name": "رائدة التحصيل", "cat": "أكاديمية", "goal": "رفع التحصيل الأكاديمي للطالبات عبر ممارسات تدريسية فعّالة", "reward": "شهادة تقدير + تحفيز مادي رمزي", "ev": ["تقارير التحصيل", "نتائج الاختبارات", "خطط الدعم الأكاديمي", "متابعات الأقسام"], "b": ["تحقيق قيمة مضافة في التقييمات الأساسية"], "g": ["تحقيق قيمة مضافة لجميع الصفوف", "تحقيق قيمة مضافة مستمرة في جميع الصفوف", "ابتكار برامج تعليمية حديثة أثرت إيجابًا على تحصيل الطالبات"]}, {"name": "رائدة التطوير", "cat": "أكاديمية", "goal": "تعزيز التطوير المهني للكوادر التعليمية", "reward": "نشر داخلي + شهادة تميز مهني", "ev": ["خطة التطوير المهني", "محاضر الورش", "استبيانات الأثر المهني"], "b": ["المشاركة في تدريب القسم", "تقديم درس مشاهدة داخلي للقسم"], "g": ["تقديم ورش تدريبية معتمدة على مستوى المدرسة", "ابتكار أساليب تطوير مهني حديثة", "تقديم دروس مشاهدة للمدرسة", "تقديم دروس نموذجية"]}, {"name": "رائدة المبادرة", "cat": "أكاديمية", "goal": "تشجيع الابتكار والمبادرات لتحسين بيئة العمل", "reward": "شهادة شكر + نشر المبادرة في لوحة الشرف", "ev": ["نموذج المبادرة", "صور التطبيق", "تقارير الأثر"], "b": ["المساهمة في مبادرة مدرسية", "المشاركة في تحسين بيئة العمل", "أكثر تغطية للاحتياط في القسم"], "g": ["تنفيذ مبادرة نوعية ذات أثر واضح ومستدام وممتدة خارجيًا", "تغطية شاغر في القسم لمدة أكثر من أسبوعين"]}, {"name": "رائدة الإنجاز", "cat": "أكاديمية", "goal": "دعم المشاركة الفاعلة في الأنشطة والبرامج", "reward": "درع تميز فصلي + تحفيز رمزي", "ev": ["نتائج المسابقات", "تقارير النشاط", "صور المشاركة"], "b": ["المشاركة في أنشطة أو مسابقات داخلية لدعم الطالبات ذات أثر", "المشاركة في المسابقات الخارجية"], "g": ["تحقيق مراكز متقدمة في مسابقات محلية أو دولية", "تحقيق أفضل ملف ذكي للمعلمات"]}, {"name": "رائدة المعرفة والبحث", "cat": "أكاديمية", "goal": "تعزيز ثقافة البحث العلمي والإثراء المعرفي", "reward": "تكريم رسمي + تحفيز مادي", "ev": ["نسخة البحث", "شهادة المشاركة", "تقرير الأثر"], "b": ["المشاركة في بحث علمي أو إجرائي", "المشاركة في مسابقات تتضمن البحث والاستقصاء"], "g": ["نشر بحث تربوي أو إجرائي على مستوى الدولة", "تمثيل المدرسة في ملتقى علمي", "التأهل أو الفوز في مسابقة البحث العلمي"]}, {"name": "رائدة الابتكار والتجديد", "cat": "أكاديمية", "goal": "تحفيز الإبداع المهني والأفكار المبتكرة", "reward": "درع الابتكار + شهادة تقدير", "ev": ["نموذج الابتكار", "توثيق التطبيق", "تقرير الأثر"], "b": ["توظيف أدوات تقنية جديدة في التعليم", "ابتكار طرق تسهل العمل في المدرسة"], "g": ["ابتكار مشروع أو أداة تعليمية مميزة تنشر خارجيًا", "المشاركة في مسابقة ابتكارية على مستوى الدولة"]}, {"name": "رائدة الفن الرقمي", "cat": "أكاديمية", "goal": "الاستخدام الإبداعي للتقنيات الرقمية في التعليم", "reward": "ترشيح خارجي + نشر إلكتروني", "ev": ["ملفات العرض", "روابط الدروس", "تقارير الأداء الرقمي"], "b": ["تقديم درس إلكتروني داخلي", "الحصول على لقب رائد التعليم الإلكتروني"], "g": ["الفوز في مسابقة رقمية خارجية", "المشاركة في فعالية تقنية وطنية", "تقديم درس نموذجي إلكتروني"]}, {"name": "رائدة السلوك", "cat": "أكاديمية", "goal": "تعزيز السلوك الإيجابي لدى الطالبات", "reward": "درع السلوك الإيجابي + تكريم رسمي", "ev": ["تقارير السلوك", "استبيانات الانضباط", "صور البرامج"], "b": ["تقديم مبادرة ذات أثر لتعديل السلوك الطلابي", "حصول القسم على أقل مخالفات سلوكية"], "g": ["تنفيذ برنامج تحفيزي فعال طوال العام", "تنفيذ مبادرات لتعديل السلوك على مستوى المدرسة"]}, {"name": "الرائدة المعلمة المنضبطة", "cat": "أكاديمية", "goal": "الالتزام بعدم الغياب والاستئذان وإنجاز المهام في وقتها", "reward": "شهادة شهرية + حافز رمزي", "ev": ["سجل الحضور", "تقارير المتابعة", "شهادات الانضباط"], "b": ["عدم الغياب والتأخير لمدة شهر", "عدم الاستئذان لمدة شهر"], "g": ["عدم الغياب لمدة فصل دراسي كامل", "عدم التأخير لمدة فصل دراسي كامل"]}, {"name": "رائدة الإيجابية", "cat": "الجميع", "goal": "ترسيخ بيئة عمل إيجابية قائمة على التعاون والاحترام", "reward": "شهادة شكر + نشر داخلي", "ev": ["ترشيحات الأقسام", "تقارير القيادة", "ملاحظات الأداء"], "b": ["تقديم حلول مبتكرة لمواجهة تحديات العمل", "تنفيذ فعاليات ومبادرات لتحسين المناخ المدرسي"], "g": ["نشر ثقافة العمل الإيجابي", "الحصول على لقب أفضل مربية صف"]}, {"name": "رائدة الشراكة", "cat": "الجميع", "goal": "تفعيل الشراكات المجتمعية والتواصل مع أولياء الأمور", "reward": "درع شراكة مجتمعية + تكريم رسمي", "ev": ["خطابات التعاون", "صور الفعاليات", "تقارير الشراكات"], "b": ["التواصل الفعّال مع أولياء الأمور", "المشاركة في الأنشطة المجتمعية"], "g": ["إقامة شراكات خارجية", "تنفيذ مبادرات مجتمعية مستدامة", "تمثيل المدرسة في المحافل التربوية أو البرامج الوطنية"]}, {"name": "رائدة القيادة", "cat": "الجميع", "goal": "تمكين القيادات الوسطى في تطوير فرق العمل", "reward": "شهادة تميز قيادي + تكريم رسمي", "ev": ["خطة القسم", "تقارير الأداء", "محاضر الاجتماعات"], "b": ["قيادة مشروع أو مبادرة تطويرية على مستوى القسم أو المدرسة", "قيادة المواقف الطارئة بحكمة", "قيادة اللجان والفرق بكفاءة"], "g": ["تطوير مبادرات تربوية أو رقمية تُحدث أثرًا في بيئة التعلم", "نشر قصص نجاح المدرسة في المنصات الإعلامية أو التربوية", "التعاون مع جهات خارجية لنشر ممارسات القيادة"]}, {"name": "فريق الريادة الجماعي", "cat": "الجميع", "goal": "تحفيز العمل الجماعي والإنجازات المشتركة", "reward": "تكريم خاص للفرق", "ev": ["تقارير إنجاز الفريق"], "b": ["إنجاز جماعي مشترك على مستوى القسم"], "g": ["أداء جماعي متميز على مستوى المدرسة"]}, {"name": "الرائدة الإدارية المنضبطة", "cat": "إدارية", "goal": "الالتزام بالدوام والمناوبات وإنجاز المهام بدقة", "reward": "شهادة شهرية + حافز رمزي", "ev": ["تقارير أداء المهام", "التقرير الشهري للحضور والغياب والاستئذان"], "b": ["عدم الغياب والتأخير لمدة شهر", "عدم الاستئذان لمدة شهر"], "g": ["سجل وظيفي يعكس الالتزام المستمر بالمواعيد والتعليمات", "إنجاز المهام دون تأخير أو حاجة إلى متابعة متكررة", "الدقة العالية في تنفيذ الإجراءات والمعاملات", "المحافظة على سرية وخصوصية العمل"]}, {"name": "الرائدة الإدارية المبادرة", "cat": "إدارية", "goal": "المبادرة بالأفكار والمقترحات الإدارية وحل المشكلات", "reward": "شهادة شكر + نشر المبادرة في لوحة الشرف", "ev": ["نموذج المبادرة", "صور التطبيق", "تقارير الأثر"], "b": ["تقديم أفكار ومقترحات لتطوير العمل", "المبادرة في حل المشكلات", "المشاركة الفاعلة في اللجان والأنشطة والمبادرات"], "g": []}, {"name": "الرائدة الإدارية المتميزة", "cat": "إدارية", "goal": "تحقيق قسم متميز وإنجاز المهام بجودة عالية", "reward": "شهادة تقدير + تحفيز مادي رمزي", "ev": ["تقارير المهام المنجزة", "إشادة أو تقدير مهني موثق"], "b": ["تحقيق مستوى مرتفع من جودة الأداء", "سرعة ودقة إنجاز المهام", "تحمل المسؤولية والاعتماد على الذات", "تحقيق نتائج ملموسة في مجال العمل", "المساهمة في تحسين أداء فريق العمل"], "g": ["تحقيق إنجاز يتجاوز نطاق المهام المعتادة", "تقديم عمل يتميز بالجودة والدقة والكفاءة", "الحصول على إشادة أو تقدير مهني موثق (خارجي)"]}, {"name": "الرائدة الإدارية الإيجابية", "cat": "إدارية", "goal": "روح التعاون ودعم الأنشطة ونشر السلوك الإيجابي", "reward": "شهادة تقدير + تحفيز مادي رمزي", "ev": ["ترشيحات الأقسام", "تقارير القيادة", "ملاحظات الأداء"], "b": ["التعامل باحترام واحترافية مع الجميع", "التعاون ومساندة الزميلات", "نشر روح التفاؤل والتحفيز في بيئة العمل", "تقبل الملاحظات والتطوير بروح إيجابية", "التعامل مع التحديات بهدوء ومسؤولية", "المساهمة في تعزيز العمل الجماعي والعلاقات المهنية"], "g": ["نشر روح التعاون والاحترام في بيئة العمل", "تقديم الدعم والمساندة للزميلات عند الحاجة", "المساهمة في حل الخلافات بأسلوب مهني وإيجابي", "تشجيع العمل الجماعي وتحفيز الزميلات", "المحافظة على الإيجابية والمرونة في مواجهة الضغوط", "الحصول على لقب أفضل قسم إداري"]}, {"name": "بريد السعادة", "cat": "الجميع", "goal": "تقدير فوري عبر البريد الإلكتروني عند ملاحظة إنجاز أو سلوك إيجابي", "reward": "رسالة بريد السعادة", "ev": ["البريد الإلكتروني"], "b": ["إنجاز أو سلوك أو مبادرة إيجابية ملحوظة"], "g": []}, {"name": "فرحة بلا موعد", "cat": "الجميع", "goal": "هدايا ومفاجآت عفوية ومسابقات ترفيهية", "reward": "هدية / مفاجأة", "ev": ["صور التكريم والفعاليات التحفيزية"], "b": ["مفاجأة / هدية عفوية", "مسابقة ترفيهية"], "g": []}], "rewards": ["ترشيح خارجي + نشر إلكتروني", "تكريم خاص للفرق", "تكريم رسمي + تحفيز مادي", "درع الابتكار + شهادة تقدير", "درع السلوك الإيجابي + تكريم رسمي", "درع تميز فصلي + تحفيز رمزي", "درع شراكة مجتمعية + تكريم رسمي", "رسالة بريد السعادة", "شهادة تقدير + تحفيز مادي رمزي", "شهادة تميز قيادي + تكريم رسمي", "شهادة شكر + نشر المبادرة في لوحة الشرف", "شهادة شكر + نشر داخلي", "شهادة شهرية + حافز رمزي", "نشر داخلي + شهادة تميز مهني", "هدية / مفاجأة", "شهادة تقدير", "شهادة شكر", "تحفيز مادي رمزي", "تكريم رسمي", "نشر داخلي", "درع تميز فصلي", "كوبون أمري تدللي"]};
+const MONTHS = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+const SEM = m => (m >= 9 && m <= 12) ? "الفصل الأول" : (m >= 1 && m <= 5) ? "الفصل الثاني" : "خارج الفصلين";
+const ACAD_MONTHS = [9,10,11,12,1,2,3,4,5];
+const GOLD = "ذهبي", BASIC = "أساسي";
+const LS_KEY = "raedat_v1", PIN_KEY = "raedat_pin";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = n => String(n).padStart(2, "0");
+const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; };
+const parts = iso => { const [y,m,d] = (iso||"").split("-").map(Number); return {y,m,d}; };
+const acadYear = iso => { const {y,m} = parts(iso); return m >= 8 ? `${y}-${y+1}` : `${y-1}-${y}`; };
+const fmtDate = iso => iso ? iso.split("-").join("/") : "";
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const initial = n => (n || "؟").trim().charAt(0);
+
+/* ---------------- storage (shared database on Vercel) ---------------- */
+let DB = { records: [], employees: [] };
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function lsSet(k,v){ try { localStorage.setItem(k, v); return true; } catch(e){ return false; } }
+let PIN_MEM = "";
+const getPin = () => lsGet(PIN_KEY) || PIN_MEM;
+async function api(method, body){
+  const opt = { method, headers: { "x-pin": getPin() } };
+  if (body) { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); }
+  const r = await fetch(CONFIG.API_URL, opt);
+  let j = {}; try { j = await r.json(); } catch(e){}
+  if (!r.ok && !j.error) j = { ok: false, error: "http" + r.status };
+  return j;
+}
+async function load(quiet){
+  if (!quiet) $("syncLbl").textContent = "جارٍ الاتصال…";
+  try {
+    const res = await api("GET");
+    if (!res.ok) { $("syncLbl").textContent = ""; return res.error || "x"; }
+    DB.records = res.records || []; DB.employees = res.employees || [];
+    $("syncLbl").textContent = "متصل بالسجل المشترك";
+    return "ok";
+  } catch(e) { $("syncLbl").textContent = "تعذّر الاتصال"; if (!quiet) toast("تعذّر الاتصال بالسجل المشترك. تحققي من الإنترنت."); return "net"; }
+}
+async function persist(action, payload){
+  try { const r = await api("POST", { action, ...payload }); if (!r.ok) throw new Error(r.error || "x"); return true; }
+  catch(e){ toast("لم يُحفظ التغيير في السجل المشترك. تحققي من الاتصال وأعيدي المحاولة."); return false; }
+}
+
+/* ---------------- state ---------------- */
+const S = { empId: null, catFilter: "auto", field: 0, level: BASIC, crit: -1, ev: {}, editEmp: null };
+const fields = POLICY.fields;
+const emp = id => DB.employees.find(e => e.id === id);
+const empByName = n => DB.employees.find(e => e.name === n);
+const NOMINATORS = () => [...CONFIG.LEADERS.map(l => `${l.role}: ${l.name}`), "فريق التحفيز",
+  ...DB.employees.filter(e => (e.title||"").startsWith("منسق")).map(e => `${e.title}: ${e.name}`)];
+function yearStats(name, year){
+  const rs = DB.records.filter(r => r.name === name && acadYear(r.date) === year);
+  return { total: rs.length, gold: rs.filter(r => r.level === GOLD).length };
+}
+function coupon(e, year){
+  if (!e) return "";
+  if (e.status === "محرومة") return '<span class="tag bad">محرومة - مخالفة</span>';
+  const g = yearStats(e.name, year).gold;
+  return g >= 5 ? '<span class="tag g">مستحقة ★</span>' : `<span class="tag b">متبقي ${5-g}</span>`;
+}
+function toast(msg){ const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 3200); }
+
+/* ---------------- tabs ---------------- */
+document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => show(b.dataset.view)));
+function show(v){
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.view === v));
+  document.querySelectorAll(".view").forEach(s => s.classList.toggle("on", s.id === "v-" + v));
+  const draw = () => { if (v === "records") renderRecords(); if (v === "reports") renderReport(); if (v === "staff") renderStaff(); if (v === "entry") renderEntry(); };
+  draw(); load(true).then(st => { if (st === "ok") draw(); });
+  window.scrollTo(0, 0);
+}
+
+/* ---------------- entry: employee combobox ---------------- */
+const es = $("empSearch"), el = $("empList");
+let actIdx = -1, matches = [];
+function norm(s){ return (s||"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/\s+/g," ").trim(); }
+function openList(){
+  const q = norm(es.value);
+  matches = DB.employees.filter(e => !q || norm(e.name + " " + e.title + " " + e.dept).includes(q)).slice(0, 40);
+  el.innerHTML = matches.length ? matches.map((e,i) => `<button type="button" role="option" class="opt${i===actIdx?' act':''}" data-i="${i}">${esc(e.name)}<small>${esc(e.title)} · ${esc(e.dept)}</small></button>`).join("")
+    : '<div class="note">لا توجد نتائج</div>';
+  el.classList.add("on"); es.setAttribute("aria-expanded", "true");
+}
+function closeList(){ el.classList.remove("on"); es.setAttribute("aria-expanded", "false"); actIdx = -1; }
+es.addEventListener("input", () => { actIdx = -1; openList(); });
+es.addEventListener("focus", openList);
+es.addEventListener("keydown", e => {
+  if (e.key === "ArrowDown") { actIdx = Math.min(actIdx + 1, matches.length - 1); openList(); e.preventDefault(); }
+  else if (e.key === "ArrowUp") { actIdx = Math.max(actIdx - 1, 0); openList(); e.preventDefault(); }
+  else if (e.key === "Enter" && actIdx >= 0) { pickEmp(matches[actIdx].id); e.preventDefault(); }
+  else if (e.key === "Escape") closeList();
+});
+el.addEventListener("mousedown", e => { const b = e.target.closest(".opt"); if (b) { e.preventDefault(); pickEmp(matches[+b.dataset.i].id); } });
+document.addEventListener("click", e => { if (!e.target.closest(".combo")) closeList(); });
+function pickEmp(id){
+  S.empId = id; const e = emp(id); es.value = e.name; closeList();
+  if (S.catFilter !== "all") S.catFilter = "auto";
+  const vis = visibleFields(); if (!vis.some(v => v.i === S.field)) { S.field = vis[0].i; S.crit = -1; S.ev = {}; }
+  renderEntry();
+}
+
+/* ---------------- entry rendering ---------------- */
+function curCat(){ const e = emp(S.empId); return S.catFilter === "auto" ? (e ? e.cat : "all") : S.catFilter; }
+function visibleFields(){ const c = curCat(); return fields.map((f,i) => ({f,i})).filter(({f}) => c === "all" || f.cat === c || f.cat === "الجميع"); }
+function renderEntry(){
+  const e = emp(S.empId), year = acadYear($("date").value || todayISO());
+  $("empSel").innerHTML = e ? `<div class="emp-sel"><div class="av">${esc(initial(e.name))}</div><div><div class="n">${esc(e.name)}</div><div class="m">${esc(e.title)} · ${esc(e.dept)} · ${esc(e.cat)}${e.status==="محرومة"?' · <span class="tag bad">محرومة</span>':''}</div></div></div>` : "";
+  // category pills
+  const c = curCat();
+  const pills = [["all","كل المجالات"],["أكاديمية","أكاديمية"],["إدارية","إدارية"]];
+  $("catPills").innerHTML = pills.map(([k,l]) => `<button type="button" data-k="${k}" aria-pressed="${c===k}">${l}</button>`).join("");
+  // fields
+  $("fields").innerHTML = visibleFields().map(({f,i}) => `<button type="button" class="fbtn" data-i="${i}" aria-pressed="${i===S.field}"><b>${esc(f.name)}</b><span>${esc(f.cat)}</span></button>`).join("");
+  const f = fields[S.field];
+  if (S.level === GOLD && !f.g.length) S.level = BASIC;
+  $("critTitle").textContent = "المعيار المحقق — " + f.name;
+  $("levels").innerHTML = [[BASIC,"معيار أساسي",""],[GOLD,"معيار ذهبي","g"]].map(([k,l,cl]) =>
+    `<button type="button" class="${cl}" data-k="${k}" aria-pressed="${S.level===k}" ${k===GOLD && !f.g.length ? 'disabled title="لا توجد معايير ذهبية لهذا المجال"' : ''}>${k===GOLD?'<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>':''}${l}</button>`).join("");
+  const list = [...(S.level === GOLD ? f.g : f.b), "أخرى (تُوضَّح في الملاحظات)"];
+  $("critBox").innerHTML = `<div class="crit ${S.level===GOLD?'gold':''}" role="radiogroup" aria-label="المعايير">` +
+    list.map((t,i) => `<button type="button" class="cbtn" role="radio" data-i="${i}" aria-checked="${i===S.crit}"><span class="dot"></span><span>${esc(t)}</span></button>`).join("") + "</div>" +
+    (!f.g.length ? '<p class="note" style="margin-top:10px">لا توجد معايير ذهبية لهذا المجال في السياسة.</p>' : "");
+  $("policyReward").innerHTML = `<b>وفق السياسة: </b>${esc(f.reward)}`;
+  const rewards = [...new Set([f.reward, ...POLICY.rewards])];
+  const prev = $("reward").dataset.field === String(S.field) ? $("reward").value : f.reward;
+  $("reward").innerHTML = rewards.map(r => `<option${r===prev?' selected':''}>${esc(r)}</option>`).join("");
+  $("reward").dataset.field = String(S.field);
+  $("evidence").innerHTML = f.ev.map(x => `<button type="button" class="chip" data-v="${esc(x)}" aria-pressed="${!!S.ev[x]}">${S.ev[x]?'<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>':''}${esc(x)}</button>`).join("");
+  renderEmpCard(); renderRecentMini();
+}
+function renderEmpCard(){
+  const e = emp(S.empId), year = acadYear($("date").value || todayISO());
+  if (!e) { $("empCard").innerHTML = '<h2 style="font-size:16px">ملخص الموظفة</h2><p class="note" style="margin-top:10px">اختاري موظفة لعرض تكريماتها ومعاييرها الذهبية هذا العام.</p>'; return; }
+  const s = yearStats(e.name, year), left = Math.max(0, 5 - s.gold);
+  $("empCard").innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px"><div class="av" style="width:52px;height:52px;flex-basis:52px;font-size:20px">${esc(initial(e.name))}</div>
+      <div style="min-width:0"><div style="font-weight:700;font-size:16px">${esc(e.name)}</div><div style="color:var(--muted);font-size:13px">${esc(e.title)}</div></div></div>
+    <div class="stats"><div class="stat"><div class="k">تكريمات هذا العام</div><div class="v kufi">${s.total}</div></div>
+      <div class="stat g"><div class="k">معايير ذهبية</div><div class="v kufi">${s.gold}</div></div></div>
+    <div style="margin-top:16px"><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:8px"><span>الطريق إلى «أمري تدللي»</span><span style="color:var(--gold-ink)">${Math.min(s.gold,5)} / 5</span></div>
+      <div class="steps" aria-hidden="true">${[0,1,2,3,4].map(i => `<i class="${i<s.gold?'on':''}"></i>`).join("")}</div>
+      <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">${e.status==="محرومة" ? "حالتها «محرومة» — لا تستحق الكوبون." : left===0 ? "مستحقة لكوبون «أمري تدللي» ★" : `متبقي ${left} ${left===1?"معيار ذهبي":"معايير ذهبية"} للحصول على الكوبون`}</p></div>`;
+}
+function renderRecentMini(){
+  const rs = [...DB.records].sort((a,b) => (b.created||"").localeCompare(a.created||"")).slice(0, 5);
+  $("recentMini").innerHTML = rs.length ? rs.map(r => `<div style="padding:8px 0;border-bottom:1px solid #EEE9E6"><div style="font-weight:600;font-size:14px">${esc(r.name)}</div><div style="font-size:13px;color:var(--muted)">${esc(r.field)} · <span class="tag ${r.level===GOLD?'g':'b'}">${esc(r.level)}</span> · ${fmtDate(r.date)}</div></div>`).join("")
+    : '<p class="note">لا توجد تسجيلات بعد.</p>';
+}
+$("catPills").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.catFilter = b.dataset.k; const vis = visibleFields(); if (!vis.some(v => v.i === S.field)) { S.field = vis[0].i; S.crit = -1; S.ev = {}; } renderEntry(); });
+$("fields").addEventListener("click", e => { const b = e.target.closest(".fbtn"); if (!b) return; S.field = +b.dataset.i; S.crit = -1; S.ev = {}; renderEntry(); });
+$("levels").addEventListener("click", e => { const b = e.target.closest("button"); if (!b || b.disabled) return; S.level = b.dataset.k; S.crit = -1; renderEntry(); });
+$("critBox").addEventListener("click", e => { const b = e.target.closest(".cbtn"); if (!b) return; S.crit = +b.dataset.i; $("formErr").textContent = ""; renderEntry(); });
+$("evidence").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; const v = b.dataset.v; S.ev[v] = !S.ev[v]; renderEntry(); });
+$("date").addEventListener("change", renderEmpCard);
+$("resetBtn").addEventListener("click", resetForm);
+function resetForm(){ S.crit = -1; S.ev = {}; S.level = BASIC; $("amount").value = ""; $("evLink").value = ""; $("notes").value = ""; $("formErr").textContent = ""; $("reward").dataset.field = ""; renderEntry(); }
+$("saveBtn").addEventListener("click", async () => {
+  const e = emp(S.empId), f = fields[S.field];
+  const list = [...(S.level === GOLD ? f.g : f.b), "أخرى (تُوضَّح في الملاحظات)"];
+  const date = $("date").value;
+  if (!e) { $("formErr").textContent = "اختاري الموظفة أولًا."; es.focus(); return; }
+  if (!date) { $("formErr").textContent = "حدّدي التاريخ."; return; }
+  if (S.crit < 0) { $("formErr").textContent = "اختاري المعيار المحقق."; return; }
+  const evs = Object.keys(S.ev).filter(k => S.ev[k]); const link = $("evLink").value.trim(); if (link) evs.push(link);
+  const rec = { id: uid(), created: new Date().toISOString(), date, name: e.name, title: e.title, dept: e.dept, cat: e.cat,
+    field: f.name, level: S.level, crit: list[S.crit], reward: $("reward").value, amount: Number($("amount").value) || 0,
+    by: $("by").value, ev: evs.join("، "), notes: $("notes").value.trim() };
+  $("saveBtn").disabled = true;
+  DB.records.push(rec);
+  const ok = await persist("add", { record: rec });
+  if (ok) load(true).then(st => { if (st === "ok") renderRecentMini(); });
+  $("saveBtn").disabled = false;
+  if (!ok) { DB.records = DB.records.filter(r => r.id !== rec.id); return; }
+  toast(`تم الحفظ — ${e.name} · ${f.name}`);
+  resetForm();
+});
+
+/* ---------------- periods ---------------- */
+function periodOptions(withAll){
+  const o = []; if (withAll) o.push(["all","كل الفترات"]);
+  o.push(["S1","الفصل الأول (سبتمبر–ديسمبر)"],["S2","الفصل الثاني (يناير–مايو)"],["Y","السنة الدراسية كاملة"]);
+  ACAD_MONTHS.forEach(m => o.push(["M"+m, "شهر " + MONTHS[m-1]]));
+  return o;
+}
+function inPeriod(r, p, year){
+  if (p === "all") return true;
+  if (acadYear(r.date) !== year) return false;
+  const m = parts(r.date).m;
+  if (p === "Y") return true;
+  if (p === "S1") return SEM(m) === "الفصل الأول";
+  if (p === "S2") return SEM(m) === "الفصل الثاني";
+  return p === "M" + m;
+}
+function periodLabel(p){ return (periodOptions(true).find(x => x[0] === p) || ["",""])[1]; }
+function years(){ const s = new Set(DB.records.map(r => acadYear(r.date))); s.add(acadYear(todayISO())); return [...s].sort().reverse(); }
+
+/* ---------------- records ---------------- */
+function renderRecords(){
+  const y = acadYear(todayISO());
+  if (!$("recPeriod").options.length) $("recPeriod").innerHTML = periodOptions(true).map(([k,l]) => `<option value="${k}">${l}</option>`).join("");
+  const p = $("recPeriod").value || "all", q = norm($("recSearch").value);
+  const rs = DB.records.filter(r => inPeriod(r, p, y) && (!q || norm(r.name + " " + r.field + " " + r.crit).includes(q)))
+    .sort((a,b) => b.date.localeCompare(a.date) || (b.created||"").localeCompare(a.created||""));
+  $("recCount").textContent = `${DB.records.length} تسجيلًا في السجل` + (p !== "all" || q ? ` · المعروض ${rs.length}` : "");
+  $("recBody").innerHTML = rs.length ? rs.map(r => `<tr><td style="white-space:nowrap">${fmtDate(r.date)}</td><td style="font-weight:600">${esc(r.name)}</td><td>${esc(r.field)}</td>
+    <td><span class="tag ${r.level===GOLD?'g':'b'}">${esc(r.level)}</span></td><td>${esc(r.crit)}</td><td>${esc(r.reward)}</td><td>${r.amount||"-"}</td><td>${esc(r.by)}</td><td style="color:var(--muted)">${esc(r.ev)}</td>
+    <td><button class="btn ghost sm danger" type="button" data-del="${esc(r.id)}" aria-label="حذف السجل">حذف</button></td></tr>`).join("")
+    : '<tr class="empty"><td colspan="10">لا توجد سجلات في هذه الفترة.</td></tr>';
+  $("backupNote").textContent = "السجلات محفوظة في قاعدة البيانات المشتركة. يُستحسن تنزيل نسخة احتياطية في نهاية كل شهر. «استعادة من نسخة» تستبدل كل السجلات الحالية بمحتوى النسخة.";
+}
+$("recPeriod").addEventListener("change", renderRecords);
+$("recSearch").addEventListener("input", renderRecords);
+$("recBody").addEventListener("click", async e => {
+  const b = e.target.closest("[data-del]"); if (!b) return;
+  const r = DB.records.find(x => x.id === b.dataset.del); if (!r) return;
+  if (!confirm(`حذف تكريم ${r.name} (${r.field}) بتاريخ ${fmtDate(r.date)}؟`)) return;
+  const keep = DB.records; DB.records = DB.records.filter(x => x.id !== r.id);
+  if (!(await persist("delete", { id: r.id }))) DB.records = keep;
+  renderRecords(); renderRecentMini();
+});
+$("backupOut").addEventListener("click", () => download(new Blob([JSON.stringify(DB, null, 1)], {type:"application/json"}), `نسخة-رائدات-المستقبل-${todayISO()}.json`));
+$("backupIn").addEventListener("change", async e => {
+  const file = e.target.files[0]; if (!file) return;
+  try { const d = JSON.parse(await file.text()); if (!Array.isArray(d.records)) throw 0;
+    if (!confirm(`استعادة ${d.records.length} تسجيلًا؟ ستحل محل كل السجلات الحالية لدى جميع المستخدمات.`)) return;
+    if (!(await persist("restore", { records: d.records, employees: d.employees || [] }))) return;
+    await load(true); toast("تمت الاستعادة"); renderRecords(); renderEntry();
+  } catch(err){ toast("الملف غير صالح"); }
+  e.target.value = "";
+});
+
+/* ---------------- Excel export (no external library) ---------------- */
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(b){ let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function zip(files){
+  const enc = new TextEncoder(), chunks = [], central = []; let off = 0;
+  const u16 = v => [v & 255, (v >>> 8) & 255], u32 = v => [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255];
+  for (const [name, text] of files) {
+    const nb = enc.encode(name), data = enc.encode(text), crc = crc32(data);
+    const head = [...u32(0x04034b50), ...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(0x21), ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nb.length), ...u16(0)];
+    chunks.push(new Uint8Array(head), nb, data);
+    central.push(new Uint8Array([...u32(0x02014b50), ...u16(20), ...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(0x21), ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nb.length), ...u16(0), ...u16(0), ...u16(0), ...u16(0), ...u32(0), ...u32(off)]), nb);
+    off += head.length + nb.length + data.length;
+  }
+  const cdSize = central.reduce((s, c) => s + c.length, 0);
+  const end = new Uint8Array([...u32(0x06054b50), ...u16(0), ...u16(0), ...u16(files.length), ...u16(files.length), ...u32(cdSize), ...u32(off), ...u16(0)]);
+  return new Blob([...chunks, ...central, end], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+}
+const xmlEsc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "");
+function colName(i){ let s = ""; i++; while (i) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
+function buildXlsx(sheets){
+  // sheets: [{name, head:[], rows:[[...]], widths:[]}] ; cell value {d:'YYYY-MM-DD'} = date, number = number, else text
+  const serial = iso => { const {y,m,d} = parts(iso); return (Date.UTC(y, m-1, d) - Date.UTC(1899, 11, 30)) / 86400000; };
+  const sheetXml = sh => {
+    const rowXml = (cells, r, hdr) => `<row r="${r}">` + cells.map((v, c) => {
+      const ref = colName(c) + r;
+      if (hdr) return `<c r="${ref}" t="inlineStr" s="2"><is><t>${xmlEsc(v)}</t></is></c>`;
+      if (v && typeof v === "object" && v.d) return `<c r="${ref}" s="1"><v>${serial(v.d)}</v></c>`;
+      if (typeof v === "number") return `<c r="${ref}"><v>${v}</v></c>`;
+      if (v === "" || v == null) return "";
+      return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xmlEsc(v)}</t></is></c>`;
+    }).join("") + "</row>";
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView rightToLeft="1" workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>${sh.widths.map((w, i) => `<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join("")}</cols><sheetData>${rowXml(sh.head, 1, true)}${sh.rows.map((r, i) => rowXml(r, i + 2, false)).join("")}</sheetData></worksheet>`;
+  };
+  const files = [
+    ["[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((s, i) => `<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("")}</Types>`],
+    ["_rels/.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`],
+    ["xl/workbook.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s, i) => `<sheet name="${xmlEsc(s.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join("")}</sheets></workbook>`],
+    ["xl/_rels/workbook.xml.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((s, i) => `<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join("")}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`],
+    ["xl/styles.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="yyyy/mm/dd"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Arial"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF8A1538"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="3"><xf/><xf numFmtId="164" applyNumberFormat="1"/><xf fontId="1" fillId="2" applyFont="1" applyFill="1"/></cellXfs></styleSheet>`],
+    ...sheets.map((s, i) => [`xl/worksheets/sheet${i+1}.xml`, sheetXml(s)])
+  ];
+  return zip(files);
+}
+function download(blob, name){ const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+$("exportBtn").addEventListener("click", () => {
+  const rs = [...DB.records].sort((a,b) => a.date.localeCompare(b.date) || (a.created||"").localeCompare(b.created||""));
+  const main = { name: "سجل التحفيز",
+    head: ["التاريخ","اسم الموظفة","المجال","مستوى المعيار","المعيار المحقق","المكافأة الممنوحة","القيمة المادية (ر.ق)","المُرشِّحة / الجهة","أدلة التوثيق","ملاحظات"],
+    widths: [12,34,26,11,44,32,12,34,30,26],
+    rows: rs.map(r => [{d: r.date}, r.name, r.field, r.level, r.crit, r.reward, Number(r.amount)||0, r.by, r.ev, r.notes]) };
+  const info = { name: "للاطلاع",
+    head: ["التاريخ","اسم الموظفة","المسمى الوظيفي","القسم","الفئة","المجال","المستوى","الشهر","الفصل","السنة الدراسية"],
+    widths: [12,34,28,18,10,26,10,10,13,12],
+    rows: rs.map(r => { const e = empByName(r.name) || r; const m = parts(r.date).m; return [{d: r.date}, r.name, e.title||"", e.dept||"", e.cat||"", r.field, r.level, MONTHS[m-1], SEM(m), acadYear(r.date)]; }) };
+  download(buildXlsx([main, info]), `سجل-التحفيز-${todayISO()}.xlsx`);
+  toast(`تم تصدير ${rs.length} تسجيلًا`);
+});
+
+/* ---------------- full reports workbook (fills report-template.xlsx) ---------------- */
+async function streamBytes(u8, ts){ return new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(ts)).arrayBuffer()); }
+const inflateRaw = u8 => streamBytes(u8, new DecompressionStream("deflate-raw"));
+const deflateRaw = u8 => streamBytes(u8, new CompressionStream("deflate-raw"));
+function unzipEntries(buf){
+  const dv = new DataView(buf), u8 = new Uint8Array(buf), dec = new TextDecoder();
+  let e = buf.byteLength - 22; while (e >= 0 && dv.getUint32(e, true) !== 0x06054b50) e--;
+  if (e < 0) throw new Error("zip");
+  const n = dv.getUint16(e + 10, true); let p = dv.getUint32(e + 16, true); const out = [];
+  for (let i = 0; i < n; i++) {
+    const method = dv.getUint16(p + 10, true), crc = dv.getUint32(p + 16, true), csize = dv.getUint32(p + 20, true), usize = dv.getUint32(p + 24, true);
+    const nl = dv.getUint16(p + 28, true), xl = dv.getUint16(p + 30, true), cl = dv.getUint16(p + 32, true), off = dv.getUint32(p + 42, true);
+    const name = dec.decode(u8.subarray(p + 46, p + 46 + nl));
+    const start = off + 30 + dv.getUint16(off + 26, true) + dv.getUint16(off + 28, true);
+    out.push({ name, method, crc, csize, usize, data: u8.subarray(start, start + csize) });
+    p += 46 + nl + xl + cl;
+  }
+  return out;
+}
+function zipEntries(entries){
+  const enc = new TextEncoder(), chunks = [], central = []; let off = 0;
+  const u16 = v => [v & 255, (v >>> 8) & 255], u32 = v => [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255];
+  for (const en of entries) {
+    const nb = enc.encode(en.name);
+    const head = new Uint8Array([...u32(0x04034b50), ...u16(20), ...u16(0x0800), ...u16(en.method), ...u16(0), ...u16(0x21), ...u32(en.crc), ...u32(en.csize), ...u32(en.usize), ...u16(nb.length), ...u16(0)]);
+    chunks.push(head, nb, en.data);
+    central.push(new Uint8Array([...u32(0x02014b50), ...u16(20), ...u16(20), ...u16(0x0800), ...u16(en.method), ...u16(0), ...u16(0x21), ...u32(en.crc), ...u32(en.csize), ...u32(en.usize), ...u16(nb.length), ...u16(0), ...u16(0), ...u16(0), ...u16(0), ...u32(0), ...u32(off)]), nb);
+    off += head.length + nb.length + en.data.length;
+  }
+  const cd = central.reduce((a, c) => a + c.length, 0);
+  const end = new Uint8Array([...u32(0x06054b50), ...u16(0), ...u16(0), ...u16(entries.length), ...u16(entries.length), ...u32(cd), ...u32(off), ...u16(0)]);
+  return new Blob([...chunks, ...central, end], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+}
+const dateSerial = iso => { const {y,m,d} = parts(iso); return (Date.UTC(y, m-1, d) - Date.UTC(1899, 11, 30)) / 86400000; };
+function fillCells(xml, map){
+  return xml.replace(/<c r="([A-Z]+\d+)" s="(\d+)" t="n"><\/c>/g, (all, ref, st) => {
+    if (!(ref in map)) return all;
+    const v = map[ref];
+    if (v === "" || v == null) return all;
+    if (typeof v === "number") return `<c r="${ref}" s="${st}"><v>${v}</v></c>`;
+    if (typeof v === "object" && v.d) return `<c r="${ref}" s="${st}"><v>${dateSerial(v.d)}</v></c>`;
+    return `<c r="${ref}" s="${st}" t="inlineStr"><is><t xml:space="preserve">${xmlEsc(v)}</t></is></c>`;
+  });
+}
+async function buildReportWorkbook(){
+  const res = await fetch(CONFIG.TEMPLATE_URL, { cache: "no-cache" });
+  if (!res.ok) throw new Error("template");
+  const ents = unzipEntries(await res.arrayBuffer());
+  const text = async n => { const e = ents.find(x => x.name === n); if (!e) throw new Error("missing " + n); return new TextDecoder().decode(e.method === 8 ? await inflateRaw(e.data) : e.data); };
+  const wbXml = await text("xl/workbook.xml"), rels = await text("xl/_rels/workbook.xml.rels");
+  const pathOf = name => {
+    const m = wbXml.match(new RegExp(`<sheet\\b[^>]*\\bname="${name}"[^>]*\\br:id="([^"]+)"`)); if (!m) throw new Error("sheet " + name);
+    const t = rels.match(new RegExp(`<Relationship\\b[^>]*\\bId="${m[1]}"[^>]*\\bTarget="([^"]+)"|<Relationship\\b[^>]*\\bTarget="([^"]+)"[^>]*\\bId="${m[1]}"`));
+    const target = t[1] || t[2]; return target.startsWith("/") ? target.slice(1) : "xl/" + target;
+  };
+  const recPath = pathOf("سجل التحفيز"), empPath = pathOf("الموظفات"), setPath = pathOf("الإعدادات");
+  const rs = [...DB.records].sort((a,b) => a.date.localeCompare(b.date) || (a.created||"").localeCompare(b.created||"")).slice(0, 2000);
+  const recMap = {};
+  rs.forEach((r, i) => { const row = 5 + i; const vals = [{d: r.date}, r.name, r.field, r.level, r.crit, r.reward, Number(r.amount)||0, r.by, r.ev, r.notes];
+    "ABCDEFGHIJ".split("").forEach((c, j) => recMap[c + row] = vals[j]); });
+  const empMap = {};
+  DB.employees.slice(0, 300).forEach((e, i) => { const row = 5 + i; const vals = [e.empNo || "", e.name, e.title, e.dept, e.cat, "", e.status || "نشطة"];
+    "ABCDEFG".split("").forEach((c, j) => empMap[c + row] = vals[j]); });
+  const changed = {
+    [recPath]: fillCells(await text(recPath), recMap),
+    [empPath]: fillCells(await text(empPath), empMap),
+    [setPath]: (await text(setPath)).replace(/(<c r="B4" s="\d+" t="inlineStr"><is><t>)[^<]*(<\/t>)/, `$1${acadYear(todayISO())}$2`)
+  };
+  const enc = new TextEncoder(), out = [];
+  for (const e of ents) {
+    if (changed[e.name] === undefined) { out.push(e); continue; }
+    const raw = enc.encode(changed[e.name]), comp = await deflateRaw(raw);
+    out.push({ name: e.name, method: 8, crc: crc32(raw), csize: comp.length, usize: raw.length, data: comp });
+  }
+  return { blob: zipEntries(out), count: rs.length, cut: DB.records.length > 2000 };
+}
+async function downloadReports(btn){
+  if (typeof DecompressionStream === "undefined" || typeof CompressionStream === "undefined") { toast("المتصفح قديم ولا يدعم إنشاء الملف. حدّثي المتصفح أو استخدمي «تصدير السجلات فقط»."); return; }
+  const label = btn.innerHTML; btn.disabled = true; btn.textContent = "جارٍ تجهيز الملف…";
+  try {
+    await load(true);
+    const { blob, count, cut } = await buildReportWorkbook();
+    download(blob, `تقارير-رائدات-المستقبل-${todayISO()}.xlsx`);
+    toast(cut ? "الملف يتسع لـ 2000 تسجيل؛ نُزّلت أول 2000." : `تم تنزيل ملف التقارير (${count} تسجيلًا) — افتحيه في Excel`);
+  } catch(e) { toast("تعذّر تجهيز ملف التقارير. تأكدي من وجود report-template.xlsx بجانب الموقع."); }
+  finally { btn.disabled = false; btn.innerHTML = label; }
+}
+$("reportXlsx").addEventListener("click", e => downloadReports(e.currentTarget));
+$("reportXlsx2").addEventListener("click", e => downloadReports(e.currentTarget));
+
+/* ---------------- reports ---------------- */
+function renderReport(){
+  const ys = years();
+  const yv = $("repYear").value && ys.includes($("repYear").value) ? $("repYear").value : ys[0];
+  $("repYear").innerHTML = ys.map(y => `<option dir="ltr"${y===yv?' selected':''}>${y}</option>`).join("");
+  if (!$("repPeriod").options.length) { $("repPeriod").innerHTML = periodOptions(false).map(([k,l]) => `<option value="${k}">${l}</option>`).join(""); $("repPeriod").value = "M" + parts(todayISO()).m; if (!$("repPeriod").value) $("repPeriod").value = "S1"; }
+  const p = $("repPeriod").value, rs = DB.records.filter(r => inPeriod(r, p, yv));
+  $("repTitle").innerHTML = `تقرير ${esc(periodLabel(p).replace(/ \(.+\)/, ""))} — <bdi dir="ltr">${esc(yv)}</bdi>`;
+  const gold = rs.filter(r => r.level === GOLD).length, names = new Set(rs.map(r => r.name));
+  const eligible = DB.employees.filter(e => e.status !== "محرومة" && yearStats(e.name, yv).gold >= 5).length;
+  const money = rs.reduce((s, r) => s + (Number(r.amount) || 0), 0);
+  $("kpis").innerHTML = [["عدد التكريمات", rs.length], ["موظفات مُكرَّمات", names.size], ["معايير ذهبية", gold, "g"], ["معايير أساسية", rs.length - gold], ["القيمة المادية (ر.ق)", money.toLocaleString("en")], ["مستحقات أمري تدللي (السنة)", eligible, "g"]]
+    .map(([k, v, c]) => `<div class="kpi ${c||''}"><div class="k">${k}</div><div class="v kufi">${v}</div></div>`).join("");
+  const bars = (items, keyFn) => {
+    const rows = items.map(it => { const sub = rs.filter(r => keyFn(r) === it); return { it, b: sub.filter(r => r.level !== GOLD).length, g: sub.filter(r => r.level === GOLD).length }; });
+    const max = Math.max(1, ...rows.map(x => x.b + x.g));
+    return rows.map(x => `<div class="bar"><span>${esc(x.it)}</span><div class="track" role="img" aria-label="${esc(x.it)}: ${x.b} أساسي و${x.g} ذهبي"><div class="b" style="width:${x.b/max*100}%"></div><div class="gd" style="width:${x.g/max*100}%"></div></div><span style="font-weight:700">${x.b + x.g}${x.g ? ` <small style="color:var(--gold-ink)">(${x.g}★)</small>` : ""}</span></div>`).join("");
+  };
+  const usedFields = fields.map(f => f.name).filter(n => rs.some(r => r.field === n));
+  $("byField").innerHTML = rs.length ? bars(usedFields, r => r.field) : '<p class="note">لا توجد تكريمات في هذه الفترة.</p>';
+  const monthsOf = p === "S1" ? [9,10,11,12] : p === "S2" ? [1,2,3,4,5] : p === "Y" ? ACAD_MONTHS : null;
+  $("byMonthCard").style.display = monthsOf ? "" : "none";
+  if (monthsOf) $("byMonth").innerHTML = bars(monthsOf.map(m => MONTHS[m-1]), r => MONTHS[parts(r.date).m - 1]);
+  const per = [...names].map(n => { const sub = rs.filter(r => r.name === n); const e = empByName(n); return { n, dept: e ? e.dept : (sub[0].dept||""), c: sub.length, g: sub.filter(r => r.level === GOLD).length, m: sub.reduce((s, r) => s + (Number(r.amount)||0), 0), e }; })
+    .sort((a, b) => b.c - a.c || b.g - a.g || a.n.localeCompare(b.n, "ar"));
+  $("repEmp").innerHTML = per.length ? per.map((x, i) => `<tr><td>${i+1}</td><td style="font-weight:600">${esc(x.n)}</td><td>${esc(x.dept)}</td><td>${x.c}</td><td>${x.g ? `<span class="tag g">${x.g}</span>` : "-"}</td><td>${x.m || "-"}</td><td>${coupon(x.e, yv)}</td></tr>`).join("")
+    : '<tr class="empty"><td colspan="7">لا توجد تكريمات في هذه الفترة.</td></tr>';
+  $("repDet").innerHTML = rs.length ? [...rs].sort((a, b) => a.date.localeCompare(b.date)).map(r => `<tr><td style="white-space:nowrap">${fmtDate(r.date)}</td><td>${esc(r.name)}</td><td>${esc(r.field)}</td><td><span class="tag ${r.level===GOLD?'g':'b'}">${esc(r.level)}</span></td><td>${esc(r.crit)}</td><td>${esc(r.reward)}</td></tr>`).join("")
+    : '<tr class="empty"><td colspan="6">—</td></tr>';
+  $("signs").innerHTML = CONFIG.LEADERS.map(l => `<div><b>${esc(l.role)}</b>${esc(l.name)}</div>`).join("");
+}
+$("repYear").addEventListener("change", renderReport);
+$("repPeriod").addEventListener("change", renderReport);
+$("printBtn").addEventListener("click", () => { const v = $("v-reports"); v.classList.add("print"); window.print(); v.classList.remove("print"); });
+
+/* ---------------- staff ---------------- */
+function renderStaff(){
+  const year = acadYear(todayISO());
+  const depts = [...new Set(DB.employees.map(e => e.dept))];
+  const dv = $("staffDept").value;
+  $("staffDept").innerHTML = `<option value="">كل الأقسام</option>` + depts.map(d => `<option${d===dv?' selected':''}>${esc(d)}</option>`).join("");
+  $("deptList").innerHTML = depts.map(d => `<option value="${esc(d)}">`).join("");
+  const q = norm($("staffSearch").value);
+  const list = DB.employees.filter(e => (!dv || e.dept === dv) && (!q || norm(e.name + " " + e.title + " " + e.dept).includes(q)));
+  $("staffCount").textContent = `${DB.employees.length} موظفة` + (list.length !== DB.employees.length ? ` · المعروض ${list.length}` : "");
+  $("staffBody").innerHTML = list.map(e => { const g = yearStats(e.name, year).gold; return `<tr><td style="font-weight:600">${esc(e.name)}</td><td>${esc(e.title)}</td><td>${esc(e.dept)}</td><td>${esc(e.cat)}</td>
+    <td>${g ? `<span class="tag g">${g}</span>` : "-"}</td><td>${coupon(e, year)}</td>
+    <td style="white-space:nowrap"><button class="btn ghost sm" type="button" data-edit="${e.id}">تعديل</button>
+    <button class="btn ghost sm" type="button" data-status="${e.id}">${e.status === "محرومة" ? "إلغاء الحرمان" : "حرمان"}</button>
+    <button class="btn ghost sm danger" type="button" data-rm="${e.id}">حذف</button></td></tr>`; }).join("") || '<tr class="empty"><td colspan="7">لا توجد نتائج.</td></tr>';
+}
+$("staffSearch").addEventListener("input", renderStaff);
+$("staffDept").addEventListener("change", renderStaff);
+$("addEmp").addEventListener("click", () => openEmp(null));
+$("staffBody").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.edit) return openEmp(b.dataset.edit);
+  if (b.dataset.status) { const x = emp(b.dataset.status); x.status = x.status === "محرومة" ? "نشطة" : "محرومة"; await persist("employees", { employees: DB.employees }); renderStaff(); return; }
+  if (b.dataset.rm) { const x = emp(b.dataset.rm); if (!confirm(`حذف ${x.name} من القائمة؟ سجلاتها السابقة تبقى في السجل.`)) return;
+    DB.employees = DB.employees.filter(y => y.id !== x.id); if (S.empId === x.id) { S.empId = null; es.value = ""; } await persist("employees", { employees: DB.employees }); renderStaff(); renderEntry(); }
+});
+function openEmp(id){
+  S.editEmp = id; const x = id ? emp(id) : { name: "", title: "", dept: "", cat: "أكاديمية", empNo: "" };
+  $("mNo").value = x.empNo || "";
+  $("mName").value = x.name; $("mTitle").value = x.title; $("mDept").value = x.dept; $("mCat").value = x.cat; $("mErr").textContent = "";
+  $("empModalT").textContent = id ? "تعديل بيانات الموظفة" : "إضافة موظفة"; $("empModal").classList.add("on"); $("mName").focus();
+}
+$("mCancel").addEventListener("click", () => $("empModal").classList.remove("on"));
+$("mSave").addEventListener("click", async () => {
+  const name = $("mName").value.replace(/\s+/g, " ").trim();
+  if (!name) { $("mErr").textContent = "اكتبي الاسم."; return; }
+  if (DB.employees.some(e => e.name === name && e.id !== S.editEmp)) { $("mErr").textContent = "هذا الاسم موجود مسبقًا."; return; }
+  const data = { name, title: $("mTitle").value.trim(), dept: $("mDept").value.trim(), cat: $("mCat").value, empNo: $("mNo").value.trim() };
+  if (S.editEmp) { const x = emp(S.editEmp); const old = x.name; Object.assign(x, data);
+    if (old !== name) { DB.records.forEach(r => { if (r.name === old) r.name = name; }); await persist("rename", { from: old, to: name }); }
+  } else DB.employees.push({ ...data, id: uid(), status: "نشطة" });
+  await persist("employees", { employees: DB.employees });
+  $("empModal").classList.remove("on"); renderStaff(); renderEntry(); toast("تم الحفظ");
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll(".modal.on").forEach(m => { if (m.id !== "pinModal") m.classList.remove("on"); }); });
+
+/* ---------------- boot ---------------- */
+async function boot(){
+  $("leaders").innerHTML = CONFIG.LEADERS.map(l => `<span>${esc(l.role)}: <b>${esc(l.name)}</b></span>`).join("") +
+    `<button type="button" id="logout" style="margin-inline-start:auto;background:none;border:0;color:#F3D9E1;text-decoration:underline;font-size:13px;padding:0;min-height:24px">تسجيل الخروج</button>`;
+  $("logout").addEventListener("click", () => { lsSet(PIN_KEY, ""); PIN_MEM = ""; location.reload(); });
+  $("date").value = todayISO();
+  $("yearLbl").textContent = acadYear(todayISO());
+  if (!getPin()) { $("pinModal").classList.add("on"); $("pinIn").focus(); return; }
+  const st = await load();
+  if (st === "pin") { lsSet(PIN_KEY, ""); PIN_MEM = ""; $("pinErr").textContent = "الرمز غير صحيح."; $("pinModal").classList.add("on"); $("pinIn").focus(); return; }
+  if (st === "config") { $("pinErr").textContent = "لم يكتمل إعداد قاعدة البيانات أو رمز الدخول في Vercel."; $("pinModal").classList.add("on"); return; }
+  $("by").innerHTML = NOMINATORS().map(n => `<option>${esc(n)}</option>`).join("");
+  renderEntry();
+}
+$("pinGo").addEventListener("click", () => { PIN_MEM = $("pinIn").value.trim(); lsSet(PIN_KEY, PIN_MEM); $("pinModal").classList.remove("on"); $("pinErr").textContent = ""; boot(); });
+$("pinIn").addEventListener("keydown", e => { if (e.key === "Enter") $("pinGo").click(); });
+boot();
+</script>
+</body>
+</html>
