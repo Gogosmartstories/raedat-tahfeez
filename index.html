@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>رائدات المستقبل — تسجيل التحفيز</title>
+<link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@700;800&display=swap" rel="stylesheet">
@@ -24,7 +25,8 @@ button{cursor:pointer}
 header.top{background:var(--maroon);color:#fff}
 .top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:16px;padding-bottom:16px}
 .brand{display:flex;align-items:center;gap:14px}
-.logo{width:48px;height:48px;border-radius:12px;background:#fff;color:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.logo{width:56px;height:56px;border-radius:12px;background:#fff;color:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;padding:5px;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:contain;display:block}
 .brand .t1{font-weight:700;font-size:20px}
 .brand .t2{font-size:13px;color:#F3D9E1}
 nav.tabs{display:flex;flex-wrap:wrap;gap:6px}
@@ -157,7 +159,7 @@ tr.empty td{text-align:center;color:var(--muted);padding:28px}
 <header class="top">
   <div class="wrap">
     <div class="brand">
-      <div class="logo kufi" aria-hidden="true">ر</div>
+      <div class="logo kufi"><img src="logo.png" alt="شعار دولة قطر" onerror="var p=this.parentNode;p.textContent='ر'"></div>
       <div>
         <div class="t1 kufi">رائدات المستقبل</div>
         <div class="t2">مدرسة هند بنت عتبة الإعدادية للبنات · سياسة التحفيز <bdi dir="ltr" id="yearLbl"></bdi> <span class="sync" id="syncLbl"></span></div>
