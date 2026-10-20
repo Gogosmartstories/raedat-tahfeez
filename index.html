@@ -176,6 +176,7 @@ tr.empty td{text-align:center;color:var(--muted);padding:28px}
   </div>
 </header>
 <div class="leaders"><div class="wrap" id="leaders"></div></div>
+<div id="netBanner" role="alert" style="display:none;background:#FBE9E9;color:#7A1414;border-bottom:1px solid #F0C4C4"><div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px"><b>تعذّر تحميل السجلات والموظفات.</b><span id="netMsg" style="flex:1 1 300px"></span><button type="button" class="btn sm" id="netRetry">إعادة المحاولة</button></div></div>
 
 <main class="wrap">
 <!-- ============ ENTRY ============ -->
@@ -194,13 +195,36 @@ tr.empty td{text-align:center;color:var(--muted);padding:28px}
       </div>
 
       <div class="card">
-        <div class="sec-h"><div class="l"><span class="num">١</span><h2>الموظفة</h2></div></div>
+        <div class="sec-h"><div class="l"><span class="num">١</span><h2>الموظفة</h2></div>
+          <div class="pills" role="group" aria-label="طريقة التسجيل" id="modePills"></div></div>
+        <div id="oneBox">
         <div class="combo">
           <label class="lb" for="empSearch">ابحثي باسم الموظفة أو المسمى أو القسم</label>
           <input id="empSearch" class="inp" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="empList" placeholder="اكتبي جزءًا من الاسم…">
           <div class="combo-list" id="empList" role="listbox"></div>
         </div>
         <div id="empSel"></div>
+        </div>
+        <div id="groupBox" style="display:none">
+          <p class="note" style="margin-bottom:12px">اختاري مجموعة جاهزة أو حدّدي الأسماء يدويًا. يُسجَّل نفس المجال والمعيار والمكافأة لكل موظفة محددة في سجل مستقل. الموظفات «المحرومات» لا يُحدَّدن تلقائيًا.</p>
+          <div class="chips" role="group" aria-label="مجموعات جاهزة" id="quickSel">
+            <button type="button" class="chip" data-q="teachers">كل المعلمات</button>
+            <button type="button" class="chip" data-q="coords">المنسقات</button>
+            <button type="button" class="chip" data-q="acad">كل الأكاديميات</button>
+            <button type="button" class="chip" data-q="admin">كل الإداريات</button>
+            <button type="button" class="chip" data-q="all">الجميع</button>
+            <button type="button" class="chip" data-q="none">مسح التحديد</button>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <div><label class="lb" for="gDept">القسم</label><select id="gDept" class="inp"></select></div>
+            <div><label class="lb" for="gSearch">بحث في القائمة</label><input id="gSearch" class="inp" type="search" placeholder="الاسم أو المسمى…"></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin:12px 0 6px">
+            <b id="gCount" style="color:var(--maroon)"></b>
+            <span><button type="button" class="btn ghost sm" id="gAllVis">تحديد الظاهر</button><button type="button" class="btn ghost sm" id="gNoneVis">إلغاء تحديد الظاهر</button></span>
+          </div>
+          <div id="gList" style="max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:4px 6px"></div>
+        </div>
       </div>
 
       <div class="card">
@@ -438,7 +462,7 @@ async function persist(action, payload){
 }
 
 /* ---------------- state ---------------- */
-const S = { empId: null, catFilter: "auto", field: 0, level: BASIC, crit: -1, ev: {}, editEmp: null };
+const S = { mode: "one", sel: new Set(), empId: null, catFilter: "auto", field: 0, level: BASIC, crit: -1, ev: {}, editEmp: null };
 const fields = POLICY.fields;
 const emp = id => DB.employees.find(e => e.id === id);
 const empByName = n => DB.employees.find(e => e.name === n);
@@ -496,10 +520,34 @@ function pickEmp(id){
 }
 
 /* ---------------- entry rendering ---------------- */
-function curCat(){ const e = emp(S.empId); return S.catFilter === "auto" ? (e ? e.cat : "all") : S.catFilter; }
+function groupList(){ return DB.employees.filter(e => S.sel.has(e.id)); }
+function curCat(){
+  if (S.catFilter !== "auto") return S.catFilter;
+  if (S.mode === "group") { const cs = new Set(groupList().map(e => e.cat)); return cs.size === 1 ? [...cs][0] : "all"; }
+  const e = emp(S.empId); return e ? e.cat : "all";
+}
+function fixField(){ const vis = visibleFields(); if (vis.length && !vis.some(v => v.i === S.field)) { S.field = vis[0].i; S.crit = -1; S.ev = {}; } }
+function renderGroup(){
+  const depts = [...new Set(DB.employees.map(e => e.dept))];
+  const dv = $("gDept").value;
+  $("gDept").innerHTML = '<option value="">كل الأقسام</option>' + depts.map(d => `<option${d===dv?' selected':''}>${esc(d)}</option>`).join("");
+  const q = norm($("gSearch").value);
+  const vis = DB.employees.filter(e => (!dv || e.dept === dv) && (!q || norm(e.name + " " + e.title + " " + e.dept).includes(q)));
+  S.visGroup = vis.map(e => e.id);
+  $("gCount").textContent = `محدد: ${S.sel.size} موظفة`;
+  $("gList").innerHTML = vis.length ? vis.map(e => `<label style="display:flex;align-items:center;gap:10px;padding:7px 8px;border-bottom:1px solid #F1ECE9;cursor:pointer">
+      <input type="checkbox" data-id="${e.id}" ${S.sel.has(e.id)?'checked':''} style="width:20px;height:20px;accent-color:var(--maroon)">
+      <span style="flex:1;min-width:0"><span style="font-weight:600">${esc(e.name)}</span>${e.status==="محرومة"?' <span class="tag bad">محرومة</span>':''}<small style="display:block;color:var(--muted);font-size:12px">${esc(e.title)} · ${esc(e.dept)}</small></span></label>`).join("")
+    : '<p class="note" style="margin:6px">لا توجد نتائج.</p>';
+}
 function visibleFields(){ const c = curCat(); return fields.map((f,i) => ({f,i})).filter(({f}) => c === "all" || f.cat === c || f.cat === "الجميع"); }
 function renderEntry(){
   const e = emp(S.empId), year = acadYear($("date").value || todayISO());
+  $("modePills").innerHTML = [["one","موظفة واحدة"],["group","تسجيل جماعي"]].map(([k,l]) => `<button type="button" data-k="${k}" aria-pressed="${S.mode===k}">${l}</button>`).join("");
+  $("oneBox").style.display = S.mode === "one" ? "" : "none";
+  $("groupBox").style.display = S.mode === "group" ? "" : "none";
+  if (S.mode === "group") renderGroup();
+  $("saveBtn").lastChild.textContent = S.mode === "group" ? ` حفظ للمحددات (${S.sel.size})` : " حفظ في السجل";
   $("empSel").innerHTML = e ? `<div class="emp-sel"><div class="av">${esc(initial(e.name))}</div><div><div class="n">${esc(e.name)}</div><div class="m">${esc(e.title)} · ${esc(e.dept)} · ${esc(e.cat)}${e.status==="محرومة"?' · <span class="tag bad">محرومة</span>':''}</div></div></div>` : "";
   // category pills
   const c = curCat();
@@ -526,6 +574,14 @@ function renderEntry(){
 }
 function renderEmpCard(){
   const e = emp(S.empId), year = acadYear($("date").value || todayISO());
+  if (S.mode === "group") {
+    const g = groupList(), byDept = {};
+    g.forEach(x => byDept[x.dept] = (byDept[x.dept] || 0) + 1);
+    $("empCard").innerHTML = `<h2 style="font-size:16px">تسجيل جماعي</h2>
+      <div class="stats"><div class="stat" style="grid-column:1 / -1"><div class="k">الموظفات المحددات</div><div class="v kufi">${g.length}</div></div></div>
+      ${g.length ? `<div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">${Object.entries(byDept).sort((a,b)=>b[1]-a[1]).map(([d,n]) => `<div style="display:flex;justify-content:space-between;font-size:14px"><span>${esc(d)}</span><b>${n}</b></div>`).join("")}</div>` : '<p class="note" style="margin-top:10px">اختاري مجموعة أو حدّدي الأسماء.</p>'}`;
+    return;
+  }
   if (!e) { $("empCard").innerHTML = '<h2 style="font-size:16px">ملخص الموظفة</h2><p class="note" style="margin-top:10px">اختاري موظفة لعرض تكريماتها ومعاييرها الذهبية هذا العام.</p>'; return; }
   const s = yearStats(e.name, year), left = Math.max(0, 5 - s.gold);
   $("empCard").innerHTML = `
@@ -542,6 +598,19 @@ function renderRecentMini(){
   $("recentMini").innerHTML = rs.length ? rs.map(r => `<div style="padding:8px 0;border-bottom:1px solid #EEE9E6"><div style="font-weight:600;font-size:14px">${esc(r.name)}</div><div style="font-size:13px;color:var(--muted)">${esc(r.field)} · <span class="tag ${r.level===GOLD?'g':'b'}">${esc(r.level)}</span> · ${fmtDate(r.date)}</div></div>`).join("")
     : '<p class="note">لا توجد تسجيلات بعد.</p>';
 }
+$("modePills").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.mode = b.dataset.k; if (S.catFilter !== "all") S.catFilter = "auto"; fixField(); $("formErr").textContent = ""; renderEntry(); });
+$("quickSel").addEventListener("click", e => {
+  const b = e.target.closest("[data-q]"); if (!b) return;
+  const q = b.dataset.q, ok = x => x.status !== "محرومة";
+  const pick = { teachers: x => (x.title||"").startsWith("معلم"), coords: x => (x.title||"").startsWith("منسق"), acad: x => x.cat === "أكاديمية", admin: x => x.cat === "إدارية", all: () => true, none: () => false }[q];
+  S.sel = new Set(DB.employees.filter(x => pick(x) && ok(x)).map(x => x.id));
+  if (S.catFilter !== "all") S.catFilter = "auto"; fixField(); renderEntry();
+});
+$("gList").addEventListener("change", e => { const c = e.target.closest("input[data-id]"); if (!c) return; c.checked ? S.sel.add(c.dataset.id) : S.sel.delete(c.dataset.id); fixField(); renderEntry(); });
+$("gDept").addEventListener("change", renderGroup);
+$("gSearch").addEventListener("input", renderGroup);
+$("gAllVis").addEventListener("click", () => { (S.visGroup||[]).forEach(id => S.sel.add(id)); fixField(); renderEntry(); });
+$("gNoneVis").addEventListener("click", () => { (S.visGroup||[]).forEach(id => S.sel.delete(id)); fixField(); renderEntry(); });
 $("catPills").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.catFilter = b.dataset.k; const vis = visibleFields(); if (!vis.some(v => v.i === S.field)) { S.field = vis[0].i; S.crit = -1; S.ev = {}; } renderEntry(); });
 $("fields").addEventListener("click", e => { const b = e.target.closest(".fbtn"); if (!b) return; S.field = +b.dataset.i; S.crit = -1; S.ev = {}; renderEntry(); });
 $("levels").addEventListener("click", e => { const b = e.target.closest("button"); if (!b || b.disabled) return; S.level = b.dataset.k; S.crit = -1; renderEntry(); });
@@ -554,6 +623,7 @@ $("saveBtn").addEventListener("click", async () => {
   const e = emp(S.empId), f = fields[S.field];
   const list = [...(S.level === GOLD ? f.g : f.b), "أخرى (تُوضَّح في الملاحظات)"];
   const date = $("date").value;
+  if (S.mode === "group") return saveGroup(f, list, date);
   if (!e) { $("formErr").textContent = "اختاري الموظفة أولًا."; es.focus(); return; }
   if (!date) { $("formErr").textContent = "حدّدي التاريخ."; return; }
   if (S.crit < 0) { $("formErr").textContent = "اختاري المعيار المحقق."; return; }
@@ -570,6 +640,29 @@ $("saveBtn").addEventListener("click", async () => {
   toast(`تم الحفظ — ${e.name} · ${f.name}`);
   resetForm();
 });
+
+async function saveGroup(f, list, date){
+  const g = groupList();
+  if (!g.length) { $("formErr").textContent = "حدّدي موظفة واحدة على الأقل."; return; }
+  if (!date) { $("formErr").textContent = "حدّدي التاريخ."; return; }
+  if (S.crit < 0) { $("formErr").textContent = "اختاري المعيار المحقق."; return; }
+  if (g.length > 500) { $("formErr").textContent = "الحد الأقصى 500 موظفة في المرة الواحدة."; return; }
+  const deprived = g.filter(x => x.status === "محرومة").length;
+  if (!confirm(`تسجيل «${f.name}» (${S.level}) لـ ${g.length} موظفة بتاريخ ${fmtDate(date)}؟` + (deprived ? `\nتنبيه: بينهن ${deprived} محرومة.` : ""))) return;
+  const evs = Object.keys(S.ev).filter(k => S.ev[k]); const link = $("evLink").value.trim(); if (link) evs.push(link);
+  const now = new Date().toISOString();
+  const recs = g.map(x => ({ id: uid(), created: now, date, name: x.name, title: x.title, dept: x.dept, cat: x.cat,
+    field: f.name, level: S.level, crit: list[S.crit], reward: $("reward").value, amount: Number($("amount").value) || 0,
+    by: $("by").value, ev: evs.join("، "), notes: $("notes").value.trim() }));
+  $("saveBtn").disabled = true;
+  const ok = await persist("addMany", { records: recs });
+  $("saveBtn").disabled = false;
+  if (!ok) return;
+  DB.records.push(...recs);
+  load(true).then(st => { if (st === "ok") renderRecentMini(); });
+  toast(`تم تسجيل «${f.name}» لـ ${recs.length} موظفة`);
+  S.sel = new Set(); resetForm();
+}
 
 /* ---------------- periods ---------------- */
 function periodOptions(withAll){
@@ -855,6 +948,15 @@ $("mSave").addEventListener("click", async () => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll(".modal.on").forEach(m => { if (m.id !== "pinModal") m.classList.remove("on"); }); });
 
 /* ---------------- boot ---------------- */
+function showNet(st){
+  const bn = $("netBanner");
+  if (st === "ok") { bn.style.display = "none"; return; }
+  $("netMsg").textContent = st === "net"
+    ? "قد تكون شبكة المدرسة تحجب الاتصال بالموقع. جرّبي من شبكة أخرى (مثل نقطة اتصال الجوال)، أو اطلبي من قسم تقنية المعلومات السماح بالنطاق tahfeez.mujeebschool.com."
+    : "حدث خطأ في الخادم (" + st + "). أعيدي المحاولة بعد قليل.";
+  bn.style.display = "";
+}
+
 async function boot(){
   $("leaders").innerHTML = CONFIG.LEADERS.map(l => `<span>${esc(l.role)}: <b>${esc(l.name)}</b></span>`).join("") +
     `<button type="button" id="logout" style="margin-inline-start:auto;background:none;border:0;color:#F3D9E1;text-decoration:underline;font-size:13px;padding:0;min-height:24px">تسجيل الخروج</button>`;
@@ -865,10 +967,12 @@ async function boot(){
   const st = await load();
   if (st === "pin") { lsSet(PIN_KEY, ""); PIN_MEM = ""; $("pinErr").textContent = "الرمز غير صحيح."; $("pinModal").classList.add("on"); $("pinIn").focus(); return; }
   if (st === "config") { $("pinErr").textContent = "لم يكتمل إعداد قاعدة البيانات أو رمز الدخول في Vercel."; $("pinModal").classList.add("on"); return; }
+  showNet(st);
   $("by").innerHTML = NOMINATORS().map(n => `<option>${esc(n)}</option>`).join("");
   renderEntry();
 }
 $("pinGo").addEventListener("click", () => { PIN_MEM = $("pinIn").value.trim(); lsSet(PIN_KEY, PIN_MEM); $("pinModal").classList.remove("on"); $("pinErr").textContent = ""; boot(); });
+$("netRetry").addEventListener("click", async () => { const st = await load(); showNet(st); if (st === "ok") { $("by").innerHTML = NOMINATORS().map(n => `<option>${esc(n)}</option>`).join(""); renderEntry(); toast("تم الاتصال"); } });
 $("pinIn").addEventListener("keydown", e => { if (e.key === "Enter") $("pinGo").click(); });
 boot();
 </script>
