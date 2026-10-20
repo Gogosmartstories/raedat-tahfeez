@@ -80,6 +80,15 @@ module.exports = async (req, res) => {
         await redis("HSET", K_REC, r.id, JSON.stringify(r));
         return res.status(200).json({ ok: true, record: r });
       }
+      case "addMany": {
+        const recs = (Array.isArray(b.records) ? b.records : []).slice(0, 500).map(cleanRecord).filter((r) => r.date && r.name && r.field);
+        if (!recs.length) return res.status(400).json({ ok: false, error: "record" });
+        for (let i = 0; i < recs.length; i += 100) {
+          const args = []; recs.slice(i, i + 100).forEach((r) => args.push(r.id, JSON.stringify(r)));
+          await redis("HSET", K_REC, ...args);
+        }
+        return res.status(200).json({ ok: true, count: recs.length });
+      }
       case "delete":
         await redis("HDEL", K_REC, clean(b.id, 40));
         return res.status(200).json({ ok: true });
